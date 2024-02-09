@@ -1,0 +1,248 @@
+# Student Name: Liu JiaJun
+# Student ID: 211283E
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: CAD FoodShareHub Template
+
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+
+  MyPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: true
+
+  MyPrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.2.0/24
+
+  MyPrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.3.0/24
+
+  MyCloud9Environment:
+    Type: AWS::Cloud9::EnvironmentEC2
+    Properties:
+      SubnetId: !Ref MyPublicSubnet
+      InstanceType: t2.micro
+
+  MyDBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for RDS
+      VpcId: !Ref MyVPC
+
+  MyDBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet Group for RDS
+      SubnetIds:
+        - !Ref MyPrivateSubnetA
+        - !Ref MyPrivateSubnetB
+
+  MyRDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: 20
+      Engine: mysql
+      MasterUsername: admin
+      MasterUserPassword: YOUR_PASSWORD
+      DBSubnetGroupName: !Ref MyDBSubnetGroup
+      VPCSecurityGroups:
+        - !GetAtt MyDBSecurityGroup.GroupId
+
+  StaticWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-static-website-bucket-name-12345
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  StaticWebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref StaticWebsiteBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${StaticWebsiteBucket}/*"
+
+  LambdaCodeBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-lambda-code-bucket-name-12345
+
+  LambdaCodeBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref LambdaCodeBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${LambdaCodeBucket}/*"
+          
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaServicePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+              - Effect: Allow
+                Action:
+                  - rekognition:*
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - sns:*
+                Resource: "*"
+
+  GetCategoriesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get_categories_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/get_categories_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+
+  CreateDonationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: create_donation_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/create_donation_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+
+  GetDonationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get_donations_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/get_donations_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+
+  SendNotificationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: send_notification_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/send_notification_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+  SubscribeNotificationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: subscribe_notification_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/subscribe_notification_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+  DetectImageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: detect_image_code.lambda_handler
+      Runtime: python3.11
+      CodeUri: s3://my-lambda-code-bucket-name-12345/detect_image_code.zip
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      DefinitionBody:
+        swagger: "2.0"
+        info:
+          title: "FoodShareHubApi"
+        paths:
+          /categories:
+            get:
+              x-amazon-apigateway-integration:
+                uri: 
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${GetCategoriesFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            options:
+              responses: {}
+
+          /donations:
+            get:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${GetDonationsFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            post:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${CreateDonationFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            options:
+              responses: {}
+
+          /notification:
+            post:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${SendNotificationFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            options:
+              responses: {}
+
+          /recognition:
+            post:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${DetectImageFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            options:
+              responses: {}
+
+          /subscribe_notification:
+            post:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: "arn:aws:apigateway:ap-southeast-1:lambda:path/2024-02-08/functions/${SubscribeNotificationFunction.Arn}/invocations"
+                httpMethod: POST
+                type: aws_proxy
+            options:
+              responses: {}
+

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>FoodShareHub - A Donation Platform</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="icon" href="assets/imgs/theme/FSH-Browser-Logo.jpeg"/>
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/main.css?v=5.6" />
+    <link rel="stylesheet" href="assets/css/plugins/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css?v=1.1" />
+
+    <!-- Font Awesome kit -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Boostrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"/>
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+</head>
+
+<body>
+    <!-- Start header -->
+    <header class="header-area header-style-1 header-height-2">
+        <div class="mobile-promotion">
+          <span>Share More, Waste Less</span>
+        </div>
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+          <div class="container">
+              <div class="header-wrap">
+                  <div class="logo logo-width-1">
+                    <a href="index.html"><img style="border: 100px" src="assets/imgs/theme/FSH4-Logo.png" alt="logo"/></a>
+                  </div>
+                  <div class="header-right">
+                      <div class="search-style-2">
+                        <div id="search" class="form">
+                            <select class="select-active">
+                              <option>All Categories</option>
+                              <option>Milks & Dairies</option>
+                              <option>Fresh Fruits</option>
+                              <option>Vegetables</option>
+                              <option>Wine & Drinks</option>
+                              <option>Baking Material</option>
+                              <option>Pet Foods</option>
+                              <option>Noodles & Rice</option>
+                              <option>Snacks</option>
+                              <option>Others</option>
+                            </select>
+                            <input id="searchInput" type="text" placeholder="Search for items..." />
+                          </div>
+                      </div>
+                      <div class="header-action-right">
+                          <div class="header-action-2">
+                              <div class="search-location">
+                                  <form action="#">
+                                      <select class="select-active">
+                                          <option>Nanyang Polytechnic</option>
+                                      </select>
+                                  </form>
+                              </div>
+                              <div class="header-action-icon-2" style="display: none;">
+                                  <a href="#">
+                                      <img class="svgInject" alt="Nest" src="assets/imgs/theme/icons/icon-compare.svg" />
+                                      <span class="pro-count blue">3</span>
+                                  </a>
+                                  <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
+                              </div>
+                              <div class="header-action-icon-2" style="display: none;">
+                                  
+                              </div>
+                              <div class="header-action-icon-2" style="display: none;">
+                                
+                              </div>
+                              <div class="header-action-icon-2">
+                                  <a href="#">
+                                      <img class="svgInject" alt="Nest" src="assets/imgs/theme/icons/icon-user.svg" />
+                                  </a>
+                                  <a href="#"><span class="lable ml-0">Account</span></a>
+                                  <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                      <ul>
+                                          <li><a href="#"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
+                                          <li><a href="#"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
+                                          <li><a href="#"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <div class="header-bottom header-bottom-bg-color sticky-bar">
+          <div class="container">
+            <div class="header-wrap header-space-between position-relative">
+              <div class="logo logo-width-1 d-block d-lg-none">
+                <a href="index.html"
+                  ><img
+                    src="assets/imgs/theme/FSH4-Logo.png"
+                    alt="logo"
+                /></a>
+              </div>
+  
+              <div class="header-nav d-none d-lg-flex">
+                <div class="main-categori-wrap d-none d-lg-block">
+                  <a class="categories-button-active" href="#">
+                    <span class="fi-rs-apps"></span>
+                    <span class="et">Browse</span> All Categories
+                    <i class="fi-rs-angle-down"></i>
+                  </a>
+                  <div
+                    class="categories-dropdown-wrap categories-dropdown-active-large font-heading"
+                  >
+                    <div class="d-flex categori-dropdown-inner">
+                      <ul>
+                        <li>
+                          <a onclick="performSearchByCategory('Milks & Dairies')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-1.svg"
+                              alt=""
+                            />Milks & Dairies</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Vegetables')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-8.svg"
+                              alt=""
+                            />Vegetables</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Baking Material')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-1.svg"
+                              alt=""
+                            />Baking Material</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Noodles & Rice')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-9.svg"
+                              alt=""
+                            />Noodles & Rice</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Others')"
+                            ><img
+                              src="assets/imgs/theme/icons/icon-4.svg"
+                              alt=""
+                            />Others</a
+                          >
+                        </li>
+                      </ul>
+                      <ul class="end">
+                        <li>
+                          <a onclick="performSearchByCategory('Fresh Fruits')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-7.svg"
+                              alt=""
+                            />Fresh Fruits</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Wine & Drinks')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-2.svg"
+                              alt=""
+                            />Wine & Drinks</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Pet Foods')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-4.svg"
+                              alt=""
+                            />Pet Foods</a
+                          >
+                        </li>
+                        <li>
+                          <a onclick="performSearchByCategory('Snacks')"
+                            ><img
+                              src="assets/imgs/theme/icons/category-5.svg"
+                              alt=""
+                            />Snacks</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+  
+                <div
+                  class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading"
+                >
+                  <nav>
+                    <ul>
+                      <li class="hot-deals">
+                        <img
+                          src="assets/imgs/theme/icons/icon-hot.svg"
+                          alt="hot deals"
+                        />
+                        <a href="index.html">Home</a>
+                      </li>
+                      <li>
+                        <a>Food Share<i class="fi-rs-angle-down"></i></a>
+                        <ul class="sub-menu">
+                          <li>
+                            <a href="listMyDonations.html"
+                              >My Listings</a
+                            >
+                          </li>
+                          <li>
+                            <a href="#"
+                              >Add FoodItems</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+  
+              <div class="header-action-icon-2 d-block d-lg-none">
+                <div class="burger-icon burger-icon-white">
+                  <span class="burger-icon-top"></span>
+                  <span class="burger-icon-mid"></span>
+                  <span class="burger-icon-bottom"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style">
+      <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-top">
+          <div class="mobile-header-logo">
+            <a href="#"
+              ><img
+                src="assets/imgs/theme/FSH4-Logo.png"
+                alt="logo"
+            /></a>
+          </div>
+          <div
+            class="mobile-menu-close close-style-wrap close-style-position-inherit"
+          >
+            <button class="close-style search-close">
+              <i class="icon-top"></i>
+              <i class="icon-bottom"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mobile-header-content-area">
+          <div class="mobile-search search-style-3 mobile-header-border">
+            <form action="#">
+              <input type="text" placeholder="Search for items…" />
+              <button type="submit"><i class="fi-rs-search"></i></button>
+            </form>
+          </div>
+          <div class="mobile-menu-wrap mobile-header-border">
+            <!-- mobile menu start -->
+            <nav>
+              <ul class="mobile-menu font-heading">
+                <li class="menu-item-has-children">
+                  <a href="index.html">Home</a>
+                </li>
+                <li class="menu-item-has-children">
+                  <a href="#">Food Share</a>
+                  <ul class="dropdown">
+                    <li>
+                      <a href="listMyDonations.html"
+                        >My Listings</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Add FoodItems</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+            <!-- mobile menu end -->
+          </div>
+          <div class="mobile-header-info-wrap">
+            <div class="single-mobile-header-info">
+              <a
+                ><i class="fi-rs-marker"></i> 180 Ang Mo Kio Ave 8, Singapore
+                569830
+              </a>
+            </div>
+            <div class="single-mobile-header-info">
+              <a><i class="fi-rs-user"></i>Log In / Sign Up </a>
+            </div>
+            <div class="single-mobile-header-info">
+              <a><i class="fi-rs-headphones"></i>(+65) - 8183 - 8227 </a>
+            </div>
+          </div>
+          <div class="mobile-social-icon mb-50">
+            <h6 class="mb-15">Follow Us</h6>
+            <a
+              ><img
+                src="assets/imgs/theme/icons/icon-facebook-white.svg"
+                alt=""
+            /></a>
+            <a
+              ><img
+                src="assets/imgs/theme/icons/icon-twitter-white.svg"
+                alt=""
+            /></a>
+            <a
+              ><img
+                src="assets/imgs/theme/icons/icon-instagram-white.svg"
+                alt=""
+            /></a>
+            <a
+              ><img
+                src="assets/imgs/theme/icons/icon-pinterest-white.svg"
+                alt=""
+            /></a>
+            <a
+              ><img
+                src="assets/imgs/theme/icons/icon-youtube-white.svg"
+                alt=""
+            /></a>
+          </div>
+          <div class="site-copyright">
+            Copyright 2024 © FoodShareHub. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End header-->
+    
+    <main class="main">
+        <div class="page-header mt-30 mb-50">
+            <div class="container">
+                <div class="archive-header">
+                    <div class="row align-items-center">
+                        <div class="col-xl-5">
+                            <h1 class="mb-15">Add Donation Food Item</h1>
+                            <div class="breadcrumb">
+                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                                <span></span> Food Sharing <span></span> Add Donation Food Item
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-30">
+        <form id="process_add_listing_form" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h4>Image</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-upload">
+                                <img class="preview-image" id="preview" src="assets/imgs/theme/upload.svg" alt="Preview Image"/>
+                                <input class="form-control" type="file" id="image" name="image" accept="image/jpeg, image/png" onchange="showImgPreview(this); updateBase64Value();" />
+                                <span class="text-muted">Accepted Format: <strong>JPEG</strong> & <strong>PNG</strong></span>
+                                <span for="image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h4>Food Item Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <label for="name" class="form-label">Food Item title</label>
+                                <input type="text" placeholder="Type here" class="form-control" id="name" name="name" />
+                                <span for="name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="description">Description</label>
+                                <textarea placeholder="Type here" class="form-control" rows="12" style="height: 170px;" id="description" name="description" ></textarea>
+                                <span for="description" class="text-danger"></span>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4">
+                                    <label class="form-label" for="category">Categories</label>
+                                    <select class="form-select" id="category" name="category">
+                                        <option selected disabled>-- Please Select --</option>
+                                        
+                                    </select>
+                                    <span for="category" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4">
+                                    <label class="form-label" for="expiry_date">Expiry Date:</label>
+                                    <div class="row gx-2">
+                                        <span class="text-muted">Please ensure your food has at least a 7-day buffer before expiry.</span>
+                                        <input type="date" id="expiry_date" class="form-control" name="expiry_date" />
+                                        <span for="expiry_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-4">
+                                    <label class="form-label" for="pickup_location">Pick Up Location</label>
+                                    <input placeholder="Please enter your pick-up location" type="text" class="form-control" id="pickup_location" name="pickup_location" />
+                                    <div id="addressSuggestionCard" class="card mt-10" style="display: none;">
+                                        <div class="card-header">
+                                            Suggestions
+                                        </div>
+                                        <div class="card-body">
+                                            <ul id="addressSuggestionListItem">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <span for="pickup_location" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group" style="text-align: right;">
+                        <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+        <!-- Alert -->
+    </main>
+    
+    <footer class="main">
+        <section class="section-padding footer-mid">
+          <div class="container pt-15 pb-20">
+            <div class="row">
+              <div class="col">
+                <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
+                  <div class="logo mb-30">
+                    <a href="#" class="mb-15"
+                      ><img
+                        src="assets/imgs/theme/FSH4-Logo.png"
+                        alt="logo"
+                    /></a>
+                    <p class="font-lg text-heading">Share More, Waste Less</p>
+                  </div>
+                  <ul class="contact-infor">
+                    <li>
+                      <img
+                        src="assets/imgs/theme/icons/icon-location.svg"
+                        alt=""
+                      /><strong>Address:</strong>
+                      <span>180 Ang Mo Kio Ave 8, Singapore 569830</span>
+                    </li>
+                    <li>
+                      <img
+                        src="assets/imgs/theme/icons/icon-contact.svg"
+                        alt=""
+                      /><strong>Call Us:</strong> <span>(+65) - 8183-8227</span>
+                    </li>
+                    <li>
+                      <img
+                        src="assets/imgs/theme/icons/icon-email-2.svg"
+                        alt=""
+                      /><strong>Email:</strong>
+                      <span>support@FoodShareHub.com</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-link-widget col">
+                <h4 class="widget-title">Company</h4>
+                <ul class="footer-list mb-sm-5 mb-md-0">
+                  <li><a>About Us</a></li>
+                  <li><a>Privacy Policy</a></li>
+                  <li><a>Terms &amp; Conditions</a></li>
+                  <li><a>Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="footer-link-widget col">
+                <h4 class="widget-title">Account</h4>
+                <ul class="footer-list mb-sm-5 mb-md-0">
+                  <li><a>Sign In</a></li>
+                  <li><a>Sign Up</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container pb-30">
+          <div class="row align-items-center">
+            <div class="col-12 mb-30">
+              <div class="footer-bottom"></div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6">
+              <p class="font-sm mb-0">
+                &copy; 2023, <strong class="text-brand">FoodShareHub</strong> - A
+                Food Sharing Platform <br />All rights reserved
+              </p>
+            </div>
+            <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block"></div>
+            <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
+              <div class="mobile-social-icon">
+                <h6>Follow Us</h6>
+                <a
+                  ><img
+                    src="assets/imgs/theme/icons/icon-facebook-white.svg"
+                    alt=""
+                /></a>
+                <a
+                  ><img
+                    src="assets/imgs/theme/icons/icon-twitter-white.svg"
+                    alt=""
+                /></a>
+                <a
+                  ><img
+                    src="assets/imgs/theme/icons/icon-instagram-white.svg"
+                    alt=""
+                /></a>
+                <a
+                  ><img
+                    src="assets/imgs/theme/icons/icon-pinterest-white.svg"
+                    alt=""
+                /></a>
+                <a
+                  ><img
+                    src="assets/imgs/theme/icons/icon-youtube-white.svg"
+                    alt=""
+                /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </footer>
+
+    <!-- Preloader Start -->
+    <div id="loadingDiv" style="display: none">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="text-center">
+            <img
+              src="assets/imgs/theme/loading-transparent.gif"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vendor JS-->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="assets/js/plugins/wow.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="assets/js/plugins/magnific-popup.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/waypoints.js"></script>
+    <script src="assets/js/plugins/counterup.js"></script>
+    <script src="assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="assets/js/plugins/images-loaded.js"></script>
+    <script src="assets/js/plugins/isotope.js"></script>
+    <script src="assets/js/plugins/scrollup.js"></script>
+    <script src="assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="assets/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="assets/js/plugins/jquery.elevatezoom.js"></script>
+
+    <!-- Template  JS -->
+    <script src="./assets/js/main.js?v=5.6"></script>
+    <script src="./assets/js/shop.js?v=5.6"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom Js -->
+    <script src="./assets/js/site.js"></script>
+    <script src="config.js"></script>
+
+    <script>
+        var _base64;
+    
+        document.getElementById("process_add_listing_form").addEventListener("submit", function(event) {
+            event.preventDefault();
+    
+            var isValid = validateForm();
+    
+            if (isValid) {
+                // Start: Retrieve image input
+                const fileInput = document.getElementById("image");
+                const file = fileInput.files[0];
+                // End: Retrieve image input
+    
+                // Start: Retrieve form data
+                const formData = {
+                    MeetUpLocation: document.getElementById("pickup_location").value,
+                    FoodItem: {
+                        Name: document.getElementById("name").value,
+                        CategoryID: document.getElementById("category").value,
+                        Description: document.getElementById("description").value,
+                        ExpiryDate: document.getElementById("expiry_date").value,
+                        Image: {
+                            FileName: fileInput.files[0].name,
+                            ContentType: fileInput.files[0].type,
+                            Size: fileInput.files[0].size,
+                            Base64: _base64
+                        }
+                    }
+                };
+                // End: Retrieve form data
+    
+                const loadingDiv = document.getElementById('loadingDiv');
+                loadingDiv.style.display = '';
+                
+                const apiUrl = `${window.FoodShareHub_CONFIG.API_GW_BASE_URL_STR}/donations`;
+                const notificationApiUrl = `${window.FoodShareHub_CONFIG.API_GW_BASE_URL_STR}/notification`;
+                
+                // Start: Send form data using Fetch API
+                fetch(apiUrl, {
+                    method: "POST",
+                    body: JSON.stringify(formData),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("data", data)
+                    data = JSON.parse(data.body)
+                    // Hide loader
+                    loadingDiv.style.display = 'none';
+    
+                    // Extract the message from the JSON response
+                    const message = data.message;
+                    setNotificationMessage(message.category, message.text);
+                    
+                    const category = {
+                        Category: document.getElementById("category").textContent
+                    }
+                    
+                    fetch(notificationApiUrl, {
+                        method: "POST",
+                        body: JSON.stringify(category),
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    })
+                    
+                    // Redirect to the extracted URL
+                    window.location.href = "index.html";
+                    
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+                // End: Send form data using Fetch API
+            }
+        });
+    </script>
+    
+    <script>
+        // Start: Sets the minimum value allowed of the datepicker to current date
+        $(document).ready(function() {
+            $("#expiry_date").prop("min", new Date().toISOString().split("T")[0]);
+        });
+        // End: Sets the minimum value allowed of the datepicker to current date
+
+        function validateForm() {
+            var isValid = true;
+
+            // Image validation
+            var imageInput = $("input[name='image']");
+            if (imageInput.val() === "") {
+                isValid = false;
+                showError(imageInput, "Please select an image");
+            }
+
+            // Food Item title validation
+            var nameInput = $("#name");
+            if (nameInput.val() === "") {
+                isValid = false;
+                showError(nameInput, "Please enter a Food Item title");
+            }
+
+            // Description validation
+            var descriptionInput = $("#description");
+            if (descriptionInput.val() === "") {
+                isValid = false;
+                showError(descriptionInput, "Please enter a description");
+            }
+
+            // Categories validation
+            var categoryInput = $("#category");
+            if (categoryInput.val() === null) {
+                isValid = false;
+                showError(categoryInput, "Please select a category");
+            }
+
+            // Expiry Date validation
+            var expiryDateInput = $("#expiry_date");
+            if (expiryDateInput.val() === "") {
+                isValid = false;
+                showError(expiryDateInput, "Please enter an expiry date");
+            }
+
+            // Pick Up Location validation
+            var pickUpLocationInput = $("#pickup_location");
+            if (pickUpLocationInput.val() === "") {
+                isValid = false;
+                showError(pickUpLocationInput, "Please enter a pick-up location");
+            }
+
+            return isValid;
+        }
+
+        // Add blur event listener to each input field
+        $("input, textarea, select").blur(function() {
+            hideError($(this));
+        });
+
+        // Function to show error message and highlight input
+        function showError(input, message) {
+            var errorSpan = input.siblings(".text-danger");
+            errorSpan.text(message);
+            input.addClass("is-invalid");
+        }
+
+        // Function to hide error message and remove highlighting
+        function hideError(input) {
+            var errorSpan = input.siblings(".text-danger");
+            errorSpan.text("");
+            input.removeClass("is-invalid");
+        }
+    </script>
+    
+    <script>
+        // Script for Image Uploads and Object Recognition
+        // Function to convert file to base64
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(",")[1]);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function updateBase64Value(){
+            const fileInput = document.getElementById("image");
+            const file = fileInput.files[0];
+            getBase64(file)
+                .then(base64Value => {
+                    _base64 = base64Value;
+                    console.log("_base64", _base64);
+                    detectFoodItemImage();
+                })
+                .catch(error => {
+                    console.error("Error converting file to base64:", error);
+                });
+        } 
+        
+        function detectFoodItemImage(){
+            const loadingDiv = document.getElementById('loadingDiv');
+            loadingDiv.style.display = '';
+            
+            const image_data = {
+                body: _base64
+            }
+            
+            console.log("image_data", image_data);
+            // Start: Send image data using Fetch API
+            const apiUrl = `${window.FoodShareHub_CONFIG.API_GW_BASE_URL_STR}/recognition`; // Replace 'your_lambda_endpoint' with the actual Lambda endpoint
+            fetch(apiUrl, {
+                method: "POST",
+                body: JSON.stringify(image_data), // Send the image data in the 'body' field
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide loader
+                loadingDiv.style.display = 'none';
+                
+                data = JSON.parse(data.body)
+                console.log("Recognition Return Data", data);
+                // Check if an error message is present
+                if (data.message) {
+                    // Display SweetAlert with the error message
+                    Swal.fire({
+                        title: 'Error!',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+            
+                    // Reset the image input and image preview
+                    resetImageInput();
+                } else {
+                    // Handle successful response from Lambda
+                    // You can access the labels and other data from 'data' here
+                    const labels = data.labels;
+                    // Fill in Food Item Name and Select Food Item Category
+                    const nameField = document.getElementById('name');
+                    const categoryDropdown = document.getElementById('category');
+            
+                    // Check if labels array is not empty
+                    if (labels && labels.length > 0) {
+                        // Extract all label names from the data
+                        const labelNames = labels.map(label => label.Name);
+            
+                        // Fill in Food Item Name with the first label
+                        const firstLabel = labelNames[0];
+                        nameField.value = firstLabel;
+            
+                        // Select options in the category dropdown that match the label names
+                        let foundOption = false;
+                        labelNames.forEach(labelName => {
+                            const optionToSelect = Array.from(categoryDropdown.options).find(option => option.text.toLowerCase().includes(labelName.toLowerCase()));
+            
+                            if (optionToSelect) {
+                                optionToSelect.selected = true;
+                                foundOption = true;
+                            }
+                        });
+                        // If none of the options were found, select the 'others' option
+                        if (!foundOption) {
+                            const othersOption = Array.from(categoryDropdown.options).find(option => option.text.toLowerCase() === 'others');
+                            if (othersOption) {
+                                othersOption.selected = true;
+                            } else {
+                                // Handle the case where both the desired option and 'others' option are not found
+                                console.log(`Category options not found, and 'others' option not available.`);
+                            }
+                        }
+                    } else {
+                        console.error('No labels detected in the image.');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+          }
+          // End: Send image data using Fetch API
+
+            // Start: Function to show uploaded image preview
+            function showImgPreview(input) {
+                // Get the selected file
+                var file = input.files[0];
+                // Check if a file is selected
+                if (file) {
+                    // Create a FileReader object
+                    var reader = new FileReader();
+
+                    // Set up the onload event for the FileReader
+                    reader.onload = function(e) {
+                        // Perform actions to display the preview, for example, updating an <img> element
+                        $('#preview').attr('src', e.target.result);
+                    };
+
+                    // Read the file content
+                    reader.readAsDataURL(file);
+                }
+            }
+            // End: Function to show uploaded image preview
+            
+            // Start: Reset image input if inapproriate image detected
+            function resetImageInput() {
+                // Reset the file input
+                var imageInput = document.getElementById('image');
+                imageInput.value = null;
+
+                // Reset the preview image
+                var previewImage = document.getElementById('preview');
+                previewImage.src = "assets/imgs/theme/upload.svg";
+            }
+            // Start: Reset image input if inapproriate image detected
+    </script>
+
+   <script>
+      
+        // Function to fetch categories and populate the select element
+        function fetchAndRenderCategories() {
+            const apiUrl = `${window.FoodShareHub_CONFIG.API_GW_BASE_URL_STR}/categories`;
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const categories = JSON.parse(data.body);
+                console.log(categories);
+                const selectElement = document.getElementById('category');
+                if (Array.isArray(categories)) {
+                    categories.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.Id; 
+                        option.textContent = category.Name; 
+                        selectElement.appendChild(option);
+                    });
+                } else {
+                    console.error('Expected an array of categories, received:', data.categories);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching categories:', error);
+            });
+        }
+
+        // Call the function on page load
+        fetchAndRenderCategories();
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+{
+  "id": "Assignment Cloud9 Instance",
+  "configuration": "file:///home/ec2-user/environment/.c9",
+  "name": "Assignment Cloud9 Instance"
+}
